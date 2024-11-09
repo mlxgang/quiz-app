@@ -1,0 +1,32 @@
+.result-image {
+    width: 196px;
+    height: 196px;
+    align-self: center;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.details {
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 32px;
+}
+
+.details h2 {
+    letter-spacing: 1px;
+}
+
+.correct {
+    font-weight: 700;
+    color: rgb(42, 143, 85);
+}
+
+.wrong {
+    font-weight: 700;
+    color: rgb(223, 76, 37)
+}
+
