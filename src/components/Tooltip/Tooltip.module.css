@@ -1,0 +1,23 @@
+.container {
+    margin-top: 8px;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.disabled {
+    color: var(--color-primary-disabled);
+}
+
+.text {
+    font-weight: 400;
+}
+
+.strong {
+    font-weight: 700;
+}
+
+.icon {
+    height: 8px;
+    width: 12px;
+    margin-left: 3px;
+}

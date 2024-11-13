@@ -1,4 +1,5 @@
 .logo {
     align-self: flex-start;
     margin-bottom: 16px;
+    display: flex;
 }

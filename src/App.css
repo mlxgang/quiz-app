@@ -1,13 +1,12 @@
 #root {
     min-width: 1280px;
+    height: 100%;
+    padding: 50px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url("assets/background.webp") no-repeat fixed center;
-    background-size: cover;
-    height: 100vh;
 }
 
 .container {
@@ -19,12 +18,3 @@
     position: relative;
 }
 
-.footer {
-    align-self: flex-start;
-    margin-top: 16px;
-    font-size: 14px;
-    line-height: 16px;
-    font-weight: 400;
-    color: rgb(241, 241, 239);
-    letter-spacing: normal;
-}

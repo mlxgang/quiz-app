@@ -1,5 +1,14 @@
 :root {
     --color-primary: rgba(18, 83, 101);
+    --color-primary-disabled: rgb(129, 161, 169);
+
+    --color-secondary: rgb(255, 156, 70);
+    --color-secondary-disabled: rgb(237, 208, 182);
+
+    --color-primary-light: rgb(241, 241, 239);
+    --color-success: rgb(42, 143, 85);
+    --color-wrong: rgb(223, 76, 37);
+    
     --border-primary: 4px solid var(--color-primary);
     --border-radius: 10px;
 }

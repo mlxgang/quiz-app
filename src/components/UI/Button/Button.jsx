@@ -1,21 +1,30 @@
+import { Tooltip } from '@/components/Tooltip/Tooltip.jsx';
+import { useCallback, useEffect } from 'react';
 import cl from './Button.module.css'
-import { cls } from '@utils/classJoin.js';
 
-export const Button = ({variant, text, children, ...props}) => {
-    return (
-        <>
-            <div className={cl.container}>
-                <button className={cls(cl.button, cl[variant])} {...props}>
-                    {text || children}
-                </button>
-                {variant === 'primary' &&
-                    <div className={cl['tooltip-container']}>
-                        <span className={cl.tooltip}>или нажми </span>
-                        <span className={cl['tooltip-enter']}>Enter&crarr;</span>
-                    </div>
-                }
-            </div>
-        </>
-
-    )
+export const Button = ({ children, onClick, ...props }) => {
+  const onClickHandler = useCallback((e) => {
+    if (e.key === 'Enter') {
+      onClick()
+    }
+  }, [onClick])
+  
+  useEffect(() => {
+    if (!props.disabled) {
+      document.addEventListener('keydown', e => onClickHandler(e))
+    }
+    
+    return () => {
+      document.removeEventListener('keydown', e => onClickHandler(e))
+    }
+  }, [props, onClickHandler]);
+  
+  return (
+    <div className={cl.container}>
+      <button className={cl.button} onClick={onClick} {...props}>
+        {children}
+      </button>
+      <Tooltip {...props}/>
+    </div>
+  )
 }

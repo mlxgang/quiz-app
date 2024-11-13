@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+    <symbol id="minus" viewBox="0 0 60 60">
+        <circle cx="30" cy="30" r="23" stroke="currentColor" stroke-width="4" fill="none"/>
+        <path fill="currentColor" stroke="currentColor"
+              d="M39 30.385c0 .765-.619 1.384-1.385 1.384h-15.23A1.383 1.383 0 0 1 21 30.385c0-.766.619-1.385 1.385-1.385h15.23c.766 0 1.385.619 1.385 1.385Z"/>
+    </symbol>
+
+    <symbol id="plus" viewBox="0 0 60 60">
+        <circle cx="30" cy="30" r="23" stroke="currentColor" stroke-width="4" fill="none"/>
+        <path fill="currentColor" stroke="currentColor"
+              d="M31.385 22.385c0-.766-.62-1.385-1.385-1.385-.766 0-1.385.619-1.385 1.385v6.23h-6.23c-.766 0-1.385.62-1.385 1.385 0 .766.619 1.385 1.385 1.385h6.23v6.23c0 .766.62 1.385 1.385 1.385.766 0 1.385-.619 1.385-1.385v-6.23h6.23c.766 0 1.385-.62 1.385-1.385 0-.766-.619-1.385-1.385-1.385h-6.23v-6.23Z"/>
+    </symbol>
+
+    <symbol id="close" viewBox="0 0 40 40">
+        <circle cx="19.65" cy="19.65" r="15.15" stroke="currentColor" stroke-width="3" fill="none"/>
+        <path fill="currentColor" stroke="currentColor"
+              d="M24.776 16.062a1.091 1.091 0 0 0-1.542-1.542l-3.584 3.588-3.588-3.584a1.09 1.09 0 0 0-1.542 1.542l3.588 3.584-3.585 3.588a1.09 1.09 0 0 0 1.542 1.542l3.585-3.588 3.588 3.585a1.091 1.091 0 0 0 1.542-1.542l-3.588-3.585 3.584-3.588Z"/>
+    </symbol>
+
+    <symbol id="enter" viewBox="0 0 12 8">
+        <path fill="currentColor"
+              d="M3.45 7.23 1 4.82l2.45-2.41v4.82zm-.78-1.82V4.22h6.47v1.19H2.67zm5.31 0V.73h1.18v4.68H7.98z"/>
+    </symbol>
+</svg>

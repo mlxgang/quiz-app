@@ -1,4 +1,4 @@
-@import "@styles/vars.css";
+@import "@/styles/vars.css";
 
 .container {
     display: flex;
@@ -20,7 +20,14 @@
 }
 
 .button {
-    background: transparent;
+    color: var(--color-primary);
+    width: 60px;
+    display: flex;
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
 }
 
 .input {
@@ -29,6 +36,7 @@
     font-weight: 700;
     font-size: 36px;
     line-height: 36px;
+    letter-spacing: 3px;
     color: inherit;
 
     width: 118px;

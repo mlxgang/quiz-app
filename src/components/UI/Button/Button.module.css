@@ -1,4 +1,4 @@
-@import "@styles/vars.css";
+@import "@/styles/vars.css";
 
 .container {
     display: flex;
@@ -10,47 +10,13 @@
     font-size: 20px;
     line-height: 24px;
     border-radius: var(--border-radius);
-
-}
-
-.primary {
     width: 270px;
     font-weight: 700;
-    color: rgb(241, 241, 239);
-    background-color: rgb(255, 156, 70);
+    color: var(--color-primary-light);
+    background-color: var(--color-secondary);
     padding: 24px;
 }
 
-.primary:disabled {
-    color: rgb(241, 241, 239);
-    background: rgb(237, 208, 182);
+.button:disabled {
+    background: var(--color-secondary-disabled);
 }
-
-.tooltip-container {
-    margin-top: 8px;
-    font-size: 10px;
-    line-height: 12px;
-    letter-spacing: normal;
-}
-
-.button:disabled ~ .tooltip-container {
-    color: rgb(129, 161, 169);
-}
-
-.tooltip {
-    font-weight: 400;
-}
-
-.tooltip-enter {
-    font-weight: 700;
-}
-
-.secondary {
-    padding: 12px;
-    width: 100%;
-    border: var(--border-primary);
-    background: transparent;
-    font-weight: 500;
-    color: var(--color-primary);
-}
-
