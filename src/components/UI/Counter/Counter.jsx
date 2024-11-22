@@ -1,4 +1,3 @@
-// import spriteSvg from '@/assets/icons/60/sprite.svg'
 import { Icon } from '@/components/UI/Icon/Icon.jsx';
 import { useQuestionCount } from '@/contexts/QuestionCountProvider.jsx';
 import cl from './Counter.module.css'

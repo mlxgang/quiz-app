@@ -34,16 +34,15 @@ export const Quiz = () => {
         <img className={cl.flag} src={country} alt="Qusetion image"/>
         <figcaption>{data[currentQuestion - 1].question}</figcaption>
       </figure>
-      <ul className={cl.answers}>
-        {data[currentQuestion - 1].answers.map((answer, index) =>
-          <li key={answer.id}>
-            <button className={cl.answer}>
-              <span className={cl.index}>{index + 1}</span>
-              <span className={cl.text}>{answer.text}</span>
+      <ol className={cl.answers}>
+        {data[currentQuestion - 1].answers.map((answer) =>
+          <li className={cl.answer} key={answer.id}>
+            <button className={cl['answer-button']}>
+              {answer.text}
             </button>
           </li>
         )}
-      </ul>
+      </ol>
       <div className={cl.footer}>
         <Button disabled={isDisabled} onClick={() => setPage('result')}>
           Ответить

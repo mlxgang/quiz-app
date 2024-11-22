@@ -1,69 +1,68 @@
 @import "@/styles/vars.css";
 
 .close {
-    position: absolute;
-    top: 4px;
-    right: 0;
-    color: var(--color-primary-light);
+  position: absolute;
+  top: 4px;
+  right: 0;
+  color: var(--color-primary-light);
 }
 
 .close-icon {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 .title {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .flag {
-    width: 90px;
-    height: 60px;
-    border-radius: var(--border-radius);
+  width: 90px;
+  height: 60px;
+  border-radius: var(--border-radius);
 }
 
 .answers {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .answer {
-    display: flex;
-    justify-content: start;
-    gap: 12px;
-    padding: 12px;
-    width: 100%;
-
-    font-size: 20px;
-    line-height: 24px;
-    font-weight: 500;
-
-    color: var(--color-primary);
-    border: var(--border-primary);
-    border-radius: var(--border-radius);
+  font-size: 20px;
+  line-height: 24px;
+  border: var(--border-primary);
+  border-radius: var(--border-radius);
 }
 
-.index {
-    font-weight: 700;
-    width: 18px;
+.answer .answer-button::before {
+  content: counter(list-item);
+  font-weight: 700;
+  width: 18px;
 }
 
-.text {
-    text-align: start;
+.answer-button {
+  color: var(--color-primary);
+  display: flex;
+  padding: 12px;
+  gap: 12px;
+  width: 100%;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 500;
 }
 
 .footer {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .remaining {
-    margin-top: 24px;
-    font-size: 20px;
-    line-height: 24px;
-    font-weight: 700;
+  margin-top: 24px;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
 }
