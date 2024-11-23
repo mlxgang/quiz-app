@@ -1,11 +1,13 @@
 import resultImg from '@/assets/badges/result.png'
 import { Button } from '@/components/UI/Button/Button.jsx';
 import { useCurrentPage } from '@/contexts/CurrentPageProvider.jsx';
+import { useQuestionActions } from '@/contexts/QuestionProvider.jsx';
 import { useState } from 'react';
 import cl from './Result.module.css'
 
 export const Result = () => {
   const { setPage } = useCurrentPage()
+  const { resetQuestionPool } = useQuestionActions()
   const [result, setResult] = useState({ correct: 12, wrong: 6 })
   
   const resultText = {
@@ -16,6 +18,11 @@ export const Result = () => {
       className={cl.correct}>{result.correct}</span> вопросов и
       сделал <span className={cl.wrong}>{result.wrong}</span> ошибок.
     </h2>
+  }
+  
+  const buttonHandler = () => {
+    resetQuestionPool()
+    setPage('welcome')
   }
   
   return (
@@ -31,7 +38,7 @@ export const Result = () => {
         </div>
       </div>
       
-      <Button onClick={() => setPage('welcome')}>
+      <Button onClick={buttonHandler}>
         Попробовать еще
       </Button>
     </>

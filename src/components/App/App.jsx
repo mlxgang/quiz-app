@@ -3,7 +3,7 @@ import { Footer } from '@/components/Footer/Footer.jsx';
 import { Header } from '@/components/Header/Header.jsx';
 import { Card } from '@/components/UI/Card/Card.jsx';
 import { useCurrentPage } from '@/contexts/CurrentPageProvider.jsx';
-import { QuestionCountProvider } from '@/contexts/QuestionCountProvider.jsx'
+import { QuestionProvider } from '@/contexts/QuestionProvider.jsx'
 import { Quiz } from '@/pages/Quiz/Quiz.jsx';
 import { Result } from '@/pages/Result/Result.jsx';
 import { Welcome } from '@/pages/Welcome/Welcome.jsx';
@@ -21,11 +21,11 @@ export const App = () => {
   return (
     <div className={cl.container}>
       <Header/>
-      <QuestionCountProvider>
+      <QuestionProvider>
         <Card>
           {pages[page]}
         </Card>
-      </QuestionCountProvider>
+      </QuestionProvider>
       <Footer/>
     </div>
   )

@@ -1,0 +1,28 @@
+.answer {
+  font-size: 20px;
+  line-height: 24px;
+  border: var(--border-primary);
+  border-radius: var(--border-radius);
+}
+
+.answer .answer-button::before {
+  content: counter(list-item);
+  font-weight: 700;
+  width: 18px;
+}
+
+.answer-button {
+  color: var(--color-primary);
+  display: flex;
+  padding: 12px;
+  gap: 12px;
+  width: 100%;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.input {
+  display: none;
+}

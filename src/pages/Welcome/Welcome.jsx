@@ -1,11 +1,18 @@
 import welcomeBadge from '@/assets/badges/welcome.png'
+import { Counter } from '@/components/Counter/Counter.jsx';
 import { Button } from '@/components/UI/Button/Button.jsx';
-import { Counter } from '@/components/UI/Counter/Counter.jsx';
 import { useCurrentPage } from '@/contexts/CurrentPageProvider.jsx';
+import { useQuestionActions } from '@/contexts/QuestionProvider.jsx';
 import cl from './Welcome.module.css'
 
 export const Welcome = () => {
   const { setPage } = useCurrentPage()
+  const { createQuestionPool } = useQuestionActions()
+  
+  const buttonHandler = () => {
+    setPage('quiz')
+    createQuestionPool()
+  }
   
   return (
     <>
@@ -18,7 +25,7 @@ export const Welcome = () => {
       
       <Counter title="Выбери количество вопросов:"/>
       
-      <Button onClick={() => setPage('quiz')}>
+      <Button onClick={buttonHandler}>
         Начать
       </Button>
     </>
