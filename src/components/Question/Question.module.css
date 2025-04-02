@@ -1,0 +1,12 @@
+.question {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.flag {
+  width: auto;
+  height: 60px;
+  border-radius: var(--border-radius);
+}

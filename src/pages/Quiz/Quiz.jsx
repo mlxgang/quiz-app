@@ -1,54 +1,46 @@
-import country from '@/assets/countries/Country_1.webp'
-import { Button } from '@/components/UI/Button/Button.jsx';
-import { Icon } from '@/components/UI/Icon/Icon.jsx';
+import { useMemo } from 'react';
 import { useCurrentPage } from '@/contexts/CurrentPageProvider.jsx';
-import { useQuestionCount } from '@/contexts/QuestionCountProvider.jsx';
-import { useState } from 'react';
-import cl from './Quiz.module.css'
-
-const data = [
-  {
-    question: 'Флаг какой страны изображен?',
-    answers: [
-      { id: 1, text: 'Камерун' },
-      { id: 2, text: 'Нигерия' },
-      { id: 3, text: 'Центрально-Африканская Республика' },
-      { id: 4, text: 'Гаити' }
-    ]
-  }
-]
+import { useQuiz, useQuizActions } from '@/contexts/QuizProvider.jsx';
+import { Answer, Question } from '@/components';
+import { useKeyboardClick } from '@/hooks';
+import { Button, Icon } from '@UI';
+import { BUTTON_QUIZ_TEXT, PAGES } from '@/constants';
+import cl from './Quiz.module.css';
 
 export const Quiz = () => {
-  const { setPage } = useCurrentPage()
-  const { questionCount } = useQuestionCount()
-  const [isDisabled, setIsDisabled] = useState(true)
-  const [currentQuestion, setCurrentQuestion] = useState(1)
-  
+  const {setPage} = useCurrentPage();
+  const {quiz} = useQuiz();
+  const {resetQuiz, buttonHandler} = useQuizActions();
+
+  const closeButtonHandler = () => {
+    resetQuiz();
+    setPage(PAGES.welcome);
+  };
+
+  useKeyboardClick(closeButtonHandler, 'r', 'к');
+
+  const buttonText = useMemo(() => {
+    if (quiz.answerState === null) {
+      return BUTTON_QUIZ_TEXT.answer;
+    } else {
+      return BUTTON_QUIZ_TEXT.next;
+    }
+  }, [quiz.answerState]);
+
+
   return (
     <>
-      <button className={cl.close} onClick={() => setPage('welcome')}>
+      <button className={cl.close} onClick={closeButtonHandler}>
         <Icon className={cl['close-icon']} name="close"/>
       </button>
-      
-      <figure className={cl.title}>
-        <img className={cl.flag} src={country} alt="Qusetion image"/>
-        <figcaption>{data[currentQuestion - 1].question}</figcaption>
-      </figure>
-      <ol className={cl.answers}>
-        {data[currentQuestion - 1].answers.map((answer) =>
-          <li className={cl.answer} key={answer.id}>
-            <button className={cl['answer-button']}>
-              {answer.text}
-            </button>
-          </li>
-        )}
-      </ol>
+
+      <Question/>
+      <Answer/>
+
       <div className={cl.footer}>
-        <Button disabled={isDisabled} onClick={() => setPage('result')}>
-          Ответить
-        </Button>
-        <span className={cl.remaining}>{currentQuestion + ' / ' + questionCount}</span>
+        <Button disabled={!quiz.answerCandidate} onClick={buttonHandler} text={buttonText}/>
+        <span className={cl.remaining}>{quiz.index + 1 + ' / ' + quiz.pool.length}</span>
       </div>
     </>
-  )
-}
+  );
+};

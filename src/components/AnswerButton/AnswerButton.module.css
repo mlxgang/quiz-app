@@ -1,0 +1,55 @@
+.answer {
+  font-size: 20px;
+  line-height: 24px;
+  border: var(--border-primary);
+  border-radius: var(--border-radius);
+
+  color: var(--color-primary);
+  display: flex;
+  padding: 12px;
+  gap: 12px;
+  width: 100%;
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: var(--transition);
+}
+
+.answer:not(.blocked):hover,
+.checked {
+  border-color: var(--color-secondary);
+  background-color: var(--color-secondary);
+  color: var(--color-primary-light);
+}
+
+.answer::before {
+  content: counter(list-item);
+  font-weight: 700;
+  width: 18px;
+}
+
+.title {
+  text-align: left;
+  flex-grow: 1;
+}
+
+.correct,
+.wrong,
+.icon {
+  color: var(--color-primary-light);
+}
+
+.correct {
+  border-color: var(--color-success);
+  background-color: var(--color-success);
+}
+
+.wrong {
+  border-color: var(--color-wrong);
+  background-color: var(--color-wrong);
+}
+
+.icon {
+  height: 24px;
+  width: 24px;
+}

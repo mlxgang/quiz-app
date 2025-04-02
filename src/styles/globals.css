@@ -1,0 +1,45 @@
+* {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#root {
+  min-width: 1280px;
+  height: 100%;
+  padding: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  font-optical-sizing: none;
+  color: var(--color-primary);
+
+  /*background: url("@/assets/background.webp") no-repeat center / cover;*/
+  background: var(--background-image);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+h1 {
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 700;
+}
+
+h2, figcaption {
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 500;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
