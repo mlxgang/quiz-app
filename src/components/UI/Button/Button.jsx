@@ -1,30 +1,19 @@
-import { Tooltip } from '@/components/Tooltip/Tooltip.jsx';
-import { useCallback, useEffect } from 'react';
-import cl from './Button.module.css'
+import { Tooltip } from '@/components';
+import { useKeyboardClick } from '@/hooks';
+import cl from './Button.module.css';
+import { KEYBOARD_BUTTONS } from '@/constants/index.js';
 
-export const Button = ({ children, onClick, ...props }) => {
-  const onClickHandler = useCallback((e) => {
-    if (e.key === 'Enter') {
-      onClick()
-    }
-  }, [onClick])
-  
-  useEffect(() => {
-    if (!props.disabled) {
-      document.addEventListener('keydown', e => onClickHandler(e))
-    }
-    
-    return () => {
-      document.removeEventListener('keydown', e => onClickHandler(e))
-    }
-  }, [props, onClickHandler]);
-  
+export const Button = ({onClick, text, keyboardKey = KEYBOARD_BUTTONS.Enter, ...props}) => {
+  useKeyboardClick(() => {
+    !props.disabled && onClick();
+  }, keyboardKey);
+
   return (
     <div className={cl.container}>
       <button className={cl.button} onClick={onClick} {...props}>
-        {children}
+        {text}
       </button>
-      <Tooltip {...props}/>
+      <Tooltip buttonText={keyboardKey} {...props}/>
     </div>
-  )
-}
+  );
+};

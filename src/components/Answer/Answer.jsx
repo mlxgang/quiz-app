@@ -1,20 +1,23 @@
-import { RadioButton } from '@/components/RadioButton/RadioButton.jsx';
+import { useQuiz } from '@/contexts/QuizProvider.jsx';
+import { AnswerButton } from '@/components';
 import cl from './Answer.module.css';
 
-/**
- *
- * @param {Array.<string>} answers - answers pool for question
- *
- * */
+export const Answer = () => {
+  const {quiz} = useQuiz();
 
-export const Answer = ({ answers }) => {
   return (
-    <ol>
-      <form className={cl.answers}>
-        {answers.map(answer =>
-          <RadioButton answer={answer} key={answer}/>
+    <div>
+      <ol className={cl.answers}>
+        {quiz.answers.map((answer, i) =>
+          <li key={answer}>
+            <AnswerButton
+              answer={answer}
+              disabled={quiz.answerState !== null}
+              index={i + 1}
+            />
+          </li>
         )}
-      </form>
-    </ol>
-  )
-}
+      </ol>
+    </div>
+  );
+};

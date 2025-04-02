@@ -1,58 +1,66 @@
-import { Icon } from '@/components/UI/Icon/Icon.jsx';
-import { MAX_QUESTIONS, MIN_QUESTIONS } from '@/constants/constants.js';
-import { useQuestion, useQuestionActions } from '@/contexts/QuestionProvider.jsx';
-import { useMemo } from 'react';
-import cl from './Counter.module.css'
+import { useQuiz, useQuizActions } from '@/contexts/QuizProvider.jsx';
+import { useKeyboardClick } from '@/hooks/useKeyboardClick.js';
+import { KEYBOARD_BUTTONS, MAX_QUESTIONS, MIN_QUESTIONS, PATTERNS } from '@/constants/index.js';
+import { Icon } from '@UI';
+import cl from './Counter.module.css';
 
-export const Counter = ({ title }) => {
-  const { questionCount, questionPool } = useQuestion()
-  const { setQuestionCount } = useQuestionActions()
-  
-  const isPoolEmpty = useMemo(() => {
-      return questionPool.length <= 0
-    },
-    [questionPool]
-  )
-  
+export const Counter = ({title}) => {
+  const {quiz} = useQuiz();
+  const {setQuestionCount} = useQuizActions();
+
   const decrement = () => {
-    if (questionCount > MIN_QUESTIONS && isPoolEmpty) {
-      setQuestionCount(prev => Number(prev) - 1)
-    }
-  }
-  
+    if (quiz.count > MIN_QUESTIONS) setQuestionCount(quiz.count - 1);
+  };
+
   const increment = () => {
-    if (questionCount >= MAX_QUESTIONS) {
-      setQuestionCount(MAX_QUESTIONS)
-    } else if (isPoolEmpty) {
-      setQuestionCount(prev => Number(prev) + 1)
-    }
-  }
-  
+    if (quiz.count < MAX_QUESTIONS) setQuestionCount(quiz.count + 1);
+    if (isNaN(quiz.count)) setQuestionCount(1);
+  };
+
+  useKeyboardClick(decrement, KEYBOARD_BUTTONS.ArrowLeft);
+  useKeyboardClick(increment, KEYBOARD_BUTTONS.ArrowRight);
+
   const inputHandler = (e) => {
-    const { value } = e.target
-    
-    if (value <= MIN_QUESTIONS) {
-      setQuestionCount(MIN_QUESTIONS)
-    } else if (value >= MAX_QUESTIONS) {
-      setQuestionCount(MAX_QUESTIONS)
-    } else if (isPoolEmpty) {
-      setQuestionCount(value)
+    let {value} = e.target;
+    value = value.replace(PATTERNS.removeZero, '');
+    value = parseInt(value, 10);
+
+    if (!isNaN(value)) setQuestionCount('');
+
+    if (value < MIN_QUESTIONS) {
+      value = MIN_QUESTIONS;
+    } else if (value > MAX_QUESTIONS) {
+      value = MAX_QUESTIONS;
     }
-  }
-  
+    e.target.value = value;
+    setQuestionCount(value);
+  };
+
   return (
     <div className={cl.container}>
       {title && <h2 className={cl.title}>{title}</h2>}
       <div className={cl.counter}>
-        <button className={cl.button} onClick={decrement} disabled={questionCount === 1 || !isPoolEmpty}>
+        <button className={cl.button} onClick={decrement} disabled={quiz.count <= 0 || isNaN(quiz.count)}>
           <Icon className={cl.icon} name="minus"/>
         </button>
-        <input className={cl.input} type="number" value={questionCount} onChange={(e) => inputHandler(e)}/>
-        <button className={cl.button} onClick={increment} disabled={questionCount === 30 || !isPoolEmpty}>
+        <input
+          className={cl.input}
+          type="number"
+          value={quiz.count}
+          onInput={inputHandler}
+          min={MIN_QUESTIONS}
+          max={MAX_QUESTIONS}
+          step="1"
+        />
+        <button
+          className={cl.button}
+          onClick={increment}
+          disabled={quiz.count >= MAX_QUESTIONS}
+        >
           <Icon className={cl.icon} name="plus"/>
         </button>
       </div>
     </div>
-  
-  )
-}
+
+  );
+};

@@ -1,29 +1,14 @@
 .badge {
-    width: 196px;
-    height: 208px;
-    margin-top: -12px;
-    align-self: center;
+  width: 196px;
+  height: 208px;
+  margin-top: -12px;
+  align-self: center;
 }
 
 .result {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.details {
-    font-weight: 500;
-    font-size: 28px;
-    line-height: 32px;
-}
-
-.correct {
-    font-weight: 700;
-    color: var(--color-success);
-}
-
-.wrong {
-    font-weight: 700;
-    color: var(--color-wrong);
-}
 

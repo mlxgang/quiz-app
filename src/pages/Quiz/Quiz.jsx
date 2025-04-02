@@ -1,50 +1,46 @@
-import { Answer } from '@/components/Answer/Answer.jsx';
-import { Question } from '@/components/Question/Question.jsx';
-import { Button } from '@/components/UI/Button/Button.jsx';
-import { Icon } from '@/components/UI/Icon/Icon.jsx';
+import { useMemo } from 'react';
 import { useCurrentPage } from '@/contexts/CurrentPageProvider.jsx';
-import { useQuestion, useQuestionActions } from '@/contexts/QuestionProvider.jsx';
-import { useMemo, useState } from 'react';
-import cl from './Quiz.module.css'
+import { useQuiz, useQuizActions } from '@/contexts/QuizProvider.jsx';
+import { Answer, Question } from '@/components';
+import { useKeyboardClick } from '@/hooks';
+import { Button, Icon } from '@UI';
+import { BUTTON_QUIZ_TEXT, PAGES } from '@/constants';
+import cl from './Quiz.module.css';
 
 export const Quiz = () => {
-  const { setPage } = useCurrentPage()
-  const { questionPool } = useQuestion()
-  const { resetQuestionPool } = useQuestionActions()
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(1)
-  
-  const currentQuestion = useMemo(() =>
-      questionPool[currentQuestionIndex - 1]
-    , [currentQuestionIndex, questionPool]);
-  
-  const nextButtonHandler = () => {
-    if (currentQuestionIndex + 1 <= questionPool.length) {
-      setCurrentQuestionIndex(prev => prev + 1)
-    } else {
-      setPage('result')
-    }
-  }
-  
+  const {setPage} = useCurrentPage();
+  const {quiz} = useQuiz();
+  const {resetQuiz, buttonHandler} = useQuizActions();
+
   const closeButtonHandler = () => {
-    resetQuestionPool()
-    setPage('welcome')
-  }
-  
+    resetQuiz();
+    setPage(PAGES.welcome);
+  };
+
+  useKeyboardClick(closeButtonHandler, 'r', 'к');
+
+  const buttonText = useMemo(() => {
+    if (quiz.answerState === null) {
+      return BUTTON_QUIZ_TEXT.answer;
+    } else {
+      return BUTTON_QUIZ_TEXT.next;
+    }
+  }, [quiz.answerState]);
+
+
   return (
     <>
       <button className={cl.close} onClick={closeButtonHandler}>
         <Icon className={cl['close-icon']} name="close"/>
       </button>
-      
-      <Question question={{ question: currentQuestion.question, flag: currentQuestion.flag }}/>
-      <Answer answers={currentQuestion.answersPool}/>
-      
+
+      <Question/>
+      <Answer/>
+
       <div className={cl.footer}>
-        <Button disabled={false} onClick={nextButtonHandler}>
-          Ответить
-        </Button>
-        <span className={cl.remaining}>{currentQuestionIndex + ' / ' + questionPool.length}</span>
+        <Button disabled={!quiz.answerCandidate} onClick={buttonHandler} text={buttonText}/>
+        <span className={cl.remaining}>{quiz.index + 1 + ' / ' + quiz.pool.length}</span>
       </div>
     </>
-  )
-}
+  );
+};

@@ -1,46 +1,30 @@
-import resultImg from '@/assets/badges/result.png'
-import { Button } from '@/components/UI/Button/Button.jsx';
+import resultImg from '@/assets/badges/result.png';
 import { useCurrentPage } from '@/contexts/CurrentPageProvider.jsx';
-import { useQuestionActions } from '@/contexts/QuestionProvider.jsx';
-import { useState } from 'react';
-import cl from './Result.module.css'
+import { useQuizActions } from '@/contexts/QuizProvider.jsx';
+import { BUTTON_QUIZ_TEXT, PAGES } from '@/constants';
+import { ResultMessage } from '@/components';
+import { Button } from '@UI';
+import cl from './Result.module.css';
 
 export const Result = () => {
-  const { setPage } = useCurrentPage()
-  const { resetQuestionPool } = useQuestionActions()
-  const [result, setResult] = useState({ correct: 12, wrong: 6 })
-  
-  const resultText = {
-    'correct': <h2>Ты ответил правильно<br/>на все вопросы. Так держать!</h2>,
-    'wrong': <h2>Ты не ответил ни на один вопрос.<br/>Попробуй еще!</h2>,
-    'passed': <h2>
-      Ты ответил правильно <br/> на <span
-      className={cl.correct}>{result.correct}</span> вопросов и
-      сделал <span className={cl.wrong}>{result.wrong}</span> ошибок.
-    </h2>
-  }
-  
+  const {setPage} = useCurrentPage();
+  const {resetQuiz} = useQuizActions();
+
   const buttonHandler = () => {
-    resetQuestionPool()
-    setPage('welcome')
-  }
-  
+    resetQuiz();
+    setPage(PAGES.welcome);
+  };
+
   return (
     <>
       <img className={cl.badge} src={resultImg} alt="Result badge"/>
-      
+
       <div className={cl.result}>
         <h1>Результат</h1>
-        <div className={cl.details}>
-          {result.correct && result.wrong && resultText.passed}
-          {result.correct && !result.wrong && resultText.correct}
-          {!result.correct && result.wrong && resultText.wrong}
-        </div>
+        <ResultMessage/>
       </div>
-      
-      <Button onClick={buttonHandler}>
-        Попробовать еще
-      </Button>
+
+      <Button onClick={buttonHandler} text={BUTTON_QUIZ_TEXT.retry}/>
     </>
-  )
-}
+  );
+};
