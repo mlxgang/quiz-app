@@ -1,5 +1,3 @@
-@import "@/styles/variables.css";
-
 .card {
   background-color: var(--color-primary-light);
   padding: 32px;

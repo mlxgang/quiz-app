@@ -1,13 +1,5 @@
-import { cls } from './classJoin.js';
-import { createAnswersPool } from './createAnswersPool.js';
-import { createQuestions } from './createQuestions.js';
-import { getRandomByNumber } from './getRandomByNumber.js';
-import { getPluralAnswer } from './getPluralAnswer.js';
-
-export {
-  cls,
-  createAnswersPool,
-  createQuestions,
-  getRandomByNumber,
-  getPluralAnswer
-};
+export { cls } from './classJoin.js';
+export { createAnswersPool } from './createAnswersPool.js';
+export { createQuestions } from './createQuestions.js';
+export { getRandomByNumber } from './getRandomByNumber.js';
+export { getPluralAnswer } from './getPluralAnswer.js';

@@ -1,9 +1,9 @@
-import { Tooltip } from '@/components';
-import { useKeyboardClick } from '@/hooks';
+import { Tooltip } from '@components';
+import { useKeyboardClick } from '@hooks';
 import cl from './Button.module.css';
-import { KEYBOARD_BUTTONS } from '@/constants/index.js';
+import { KEYBOARD_BUTTONS } from '@constants/index.js';
 
-export const Button = ({onClick, text, keyboardKey = KEYBOARD_BUTTONS.Enter, ...props}) => {
+export const Button = ({onClick, keyboardKey = KEYBOARD_BUTTONS.Enter, children, ...props}) => {
   useKeyboardClick(() => {
     !props.disabled && onClick();
   }, keyboardKey);
@@ -11,7 +11,7 @@ export const Button = ({onClick, text, keyboardKey = KEYBOARD_BUTTONS.Enter, ...
   return (
     <div className={cl.container}>
       <button className={cl.button} onClick={onClick} {...props}>
-        {text}
+        {children}
       </button>
       <Tooltip buttonText={keyboardKey} {...props}/>
     </div>

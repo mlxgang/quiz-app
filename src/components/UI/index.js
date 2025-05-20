@@ -1,11 +1,5 @@
-import { Button } from '@UI/Button/Button.jsx';
-import { Card } from '@UI/Card/Card.jsx';
-import { Icon } from '@UI/Icon/Icon.jsx';
-import { Logo } from '@UI/Logo/Logo.jsx';
-
-export {
-  Button,
-  Card,
-  Icon,
-  Logo
-}
+export { Button } from './Button/Button.jsx';
+export { Card } from './Card/Card.jsx';
+export { Icon } from './Icon/Icon.jsx';
+export { Logo } from './Logo/Logo.jsx';
+export { Loader } from './Loader/Loader.jsx';

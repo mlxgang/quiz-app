@@ -1,11 +1,7 @@
-import { createContext, useContext, useState } from 'react';
-import { PAGES } from '@/constants/index.js';
+import { createContext, useState } from 'react';
+import { PAGES } from '@constants';
 
-const CurrentPageContext = createContext({});
-
-export const useCurrentPage = () => {
-  return useContext(CurrentPageContext);
-};
+export const CurrentPageContext = createContext({});
 
 export const CurrentPageProvider = ({children}) => {
   const [page, setPage] = useState(PAGES.welcome);

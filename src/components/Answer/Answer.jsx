@@ -1,5 +1,5 @@
-import { useQuiz } from '@/contexts/QuizProvider.jsx';
-import { AnswerButton } from '@/components';
+import { useQuiz } from '@hooks';
+import { AnswerButton } from '@components';
 import cl from './Answer.module.css';
 
 export const Answer = () => {

@@ -1,4 +1,4 @@
-import { PLURALIZE_ANSWERS } from '@/constants/index.js';
+import { PLURALIZE_ANSWERS } from '@constants/index.js';
 
 /**
  *

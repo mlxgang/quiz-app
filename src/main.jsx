@@ -1,8 +1,8 @@
-import '@/styles/index.css'
-import { App } from '@/components/App/App.jsx'
-import { CurrentPageProvider } from '@/contexts/CurrentPageProvider.jsx';
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import '@styles/index.css';
+import { App } from '@components';
+import { CurrentPageProvider } from '@contexts';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -10,4 +10,4 @@ createRoot(document.getElementById('root')).render(
       <App/>
     </CurrentPageProvider>
   </StrictMode>
-)
+);

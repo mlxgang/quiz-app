@@ -1,4 +1,4 @@
-import { useQuiz } from '@/contexts/QuizProvider.jsx';
+import { useQuiz } from '@hooks';
 import cl from './Question.module.css';
 
 export const Question = () => {

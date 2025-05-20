@@ -1,10 +1,9 @@
-import cl from './AnswerButton.module.css';
-import { useQuiz, useQuizActions } from '@/contexts/QuizProvider.jsx';
-import { cls } from '@/utils/index.js';
 import { useMemo } from 'react';
+import { KEYBOARD_BUTTONS } from '@constants';
+import { useKeyboardClick, useQuiz, useQuizActions } from '@hooks';
+import { cls } from '@utils';
 import { Icon } from '@UI';
-import { useKeyboardClick } from '@/hooks/useKeyboardClick.js';
-import { KEYBOARD_BUTTONS } from '@/constants/index.js';
+import cl from './AnswerButton.module.css';
 
 /**
  *
@@ -23,8 +22,7 @@ export const AnswerButton = ({answer, disabled, index}) => {
   };
 
   useKeyboardClick(buttonHandler, KEYBOARD_BUTTONS[index]);
-
-
+  
   const stateAnswer = useMemo(() => {
     switch (quiz.answerState) {
       case null:

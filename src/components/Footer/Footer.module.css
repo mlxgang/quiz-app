@@ -1,13 +1,18 @@
 .footer {
-    align-self: flex-start;
-    margin-top: 16px;
-    font-size: 14px;
-    line-height: 16px;
-    font-weight: 400;
-    color: var(--color-primary-light);
+  align-self: flex-start;
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
 }
 
 .link {
-    text-decoration: underline;
-    text-underline-offset: 3px
+  text-decoration: underline;
+  text-underline-offset: 3px
+}
+
+.footer,
+.link,
+.link:visited {
+  color: var(--color-primary-light);
 }

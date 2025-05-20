@@ -1,6 +1,5 @@
-import { useQuiz, useQuizActions } from '@/contexts/QuizProvider.jsx';
-import { useKeyboardClick } from '@/hooks/useKeyboardClick.js';
-import { KEYBOARD_BUTTONS, MAX_QUESTIONS, MIN_QUESTIONS, PATTERNS } from '@/constants/index.js';
+import { useKeyboardClick, useQuiz, useQuizActions } from '@hooks';
+import { KEYBOARD_BUTTONS, MAX_QUESTIONS, MIN_QUESTIONS, PATTERNS } from '@constants';
 import { Icon } from '@UI';
 import cl from './Counter.module.css';
 
@@ -27,8 +26,8 @@ export const Counter = ({title}) => {
 
     if (!isNaN(value)) setQuestionCount('');
 
-    if (value < MIN_QUESTIONS) {
-      value = MIN_QUESTIONS;
+    if (value <= 0) {
+      value = 0;
     } else if (value > MAX_QUESTIONS) {
       value = MAX_QUESTIONS;
     }
@@ -40,7 +39,7 @@ export const Counter = ({title}) => {
     <div className={cl.container}>
       {title && <h2 className={cl.title}>{title}</h2>}
       <div className={cl.counter}>
-        <button className={cl.button} onClick={decrement} disabled={quiz.count <= 0 || isNaN(quiz.count)}>
+        <button className={cl.button} onClick={decrement} disabled={quiz.count <= 1 || isNaN(quiz.count)}>
           <Icon className={cl.icon} name="minus"/>
         </button>
         <input

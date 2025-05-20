@@ -1,20 +1,18 @@
-import welcomeBadge from '@/assets/badges/welcome.png';
-import { useCurrentPage } from '@/contexts/CurrentPageProvider.jsx';
-import { useQuiz, useQuizActions } from '@/contexts/QuizProvider.jsx';
-import { BUTTON_QUIZ_TEXT, MAX_QUESTIONS, PAGES } from '@/constants';
-import { Counter } from '@/components';
-import { Button } from '@UI';
+import welcomeBadge from '@assets/badges/welcome.png';
+import { useQuiz, useQuizActions } from '@hooks';
+import { BUTTON_QUIZ_TEXT, MAX_QUESTIONS } from '@constants';
+import { Counter } from '@components';
+import { Button, Loader } from '@UI';
 import cl from './Welcome.module.css';
+import { useMemo } from 'react';
 
 export const Welcome = () => {
-  const {setPage} = useCurrentPage();
   const {quiz} = useQuiz();
   const {startQuiz} = useQuizActions();
 
-  const buttonHandler = () => {
-    startQuiz();
-    setPage(PAGES.quiz);
-  };
+  const isDisabled = useMemo(() => (
+    quiz.count === 0 || quiz.count > MAX_QUESTIONS || isNaN(quiz.count) || quiz.isLoading
+  ), [quiz.count, quiz.isLoading]);
 
   return (
     <>
@@ -28,10 +26,14 @@ export const Welcome = () => {
       <Counter title="Выбери количество вопросов:"/>
 
       <Button
-        onClick={buttonHandler}
-        text={BUTTON_QUIZ_TEXT.start}
-        disabled={quiz.count === 0 || quiz.count > MAX_QUESTIONS || isNaN(quiz.count)}
-      />
+        onClick={startQuiz}
+        disabled={isDisabled}
+      >
+        {quiz.isLoading
+          ? <Loader/>
+          : BUTTON_QUIZ_TEXT.start
+        }
+      </Button>
     </>
   );
 };

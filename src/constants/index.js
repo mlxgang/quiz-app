@@ -1,8 +1,8 @@
-import questionMockData from '@/mock/quizz_questions.json';
+import questionMockData from '@mock/quizz_questions.json';
 
 const {questions} = JSON.parse(JSON.stringify(questionMockData));
 
-export const MIN_QUESTIONS = 0;
+export const MIN_QUESTIONS = 1;
 
 export const MAX_QUESTIONS = questions.length;
 
@@ -18,6 +18,7 @@ export const KEYBOARD_BUTTONS = {
   Enter: 'Enter',
   ArrowLeft: 'ArrowLeft',
   ArrowRight: 'ArrowRight',
+  Backspace: 'Backspace',
   1: '1',
   2: '2',
   3: '3',

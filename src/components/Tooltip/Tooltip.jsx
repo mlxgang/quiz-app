@@ -1,5 +1,5 @@
 import { Icon } from '@UI';
-import { cls } from '@/utils';
+import { cls } from '@utils';
 import cl from './Tooltip.module.css';
 
 export const Tooltip = ({disabled, buttonText}) => {

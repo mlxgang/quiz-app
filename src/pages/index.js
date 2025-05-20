@@ -1,9 +1,3 @@
-import { Welcome } from './Welcome/Welcome.jsx';
-import { Quiz } from './Quiz/Quiz.jsx';
-import { Result } from './Result/Result.jsx';
-
-export {
-  Welcome,
-  Quiz,
-  Result
-};
+export { Welcome } from './Welcome/Welcome.jsx';
+export { Quiz } from './Quiz/Quiz.jsx';
+export { Result } from './Result/Result.jsx';

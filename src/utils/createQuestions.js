@@ -1,5 +1,5 @@
-import data from '@/mock/quizz_questions.json';
-import { getRandomByNumber } from '@/utils';
+import data from '@mock/quizz_questions.json';
+import { getRandomByNumber } from '@utils';
 
 /**
  *

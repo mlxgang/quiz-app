@@ -1,10 +1,10 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { useCurrentPage } from '@/contexts/CurrentPageProvider.jsx';
-import { createAnswersPool, createQuestions } from '@/utils';
-import { MIN_QUESTIONS, PAGES } from '@/constants';
+import { createContext, useEffect, useState } from 'react';
+import { useCurrentPage } from '@hooks';
+import { createAnswersPool, createQuestions } from '@utils';
+import { MIN_QUESTIONS, PAGES } from '@constants';
 
-const QuestionContext = createContext({});
-const QuestionActionsContext = createContext({});
+export const QuestionContext = createContext({});
+export const QuestionActionsContext = createContext({});
 
 const initQuiz = {
   count: MIN_QUESTIONS,
@@ -13,6 +13,7 @@ const initQuiz = {
   index: null,
   answersCorrect: 0,
   answersWrong: 0,
+  isLoading: false
 };
 
 const initQuestion = {
@@ -40,15 +41,19 @@ export const QuizProvider = ({children}) => {
     const startQuiz = () => {
       createQuestionPool();
 
-      setQuiz(prev => ({
-        ...prev,
-        index: 0,
-        question: prev.pool[0]
-      }));
+      setPreloader(() => {
+        setQuiz(prev => ({
+          ...prev,
+          index: 0,
+          question: prev.pool[0]
+        }));
+        setPage(PAGES.quiz);
+      });
     };
 
     const resetQuiz = () => {
       setQuiz({...initQuiz, ...initQuestion});
+      setPage(PAGES.welcome);
     };
 
     const createQuestion = () => {
@@ -78,7 +83,7 @@ export const QuizProvider = ({children}) => {
       }));
     };
 
-    const buttonHandler = () => {
+    const nextButtonHandler = () => {
       if (!quiz.pool.length) {
         createQuestionPool();
         return;
@@ -105,6 +110,8 @@ export const QuizProvider = ({children}) => {
     };
 
     const setAnswerCandidate = (value) => {
+      if (quiz.isLoading) return;
+
       if (quiz.answerState === null) {
         setQuiz(prev => ({
           ...prev,
@@ -114,20 +121,37 @@ export const QuizProvider = ({children}) => {
     };
 
     const checkAnswer = () => {
-      if (quiz.answerCandidate === quiz.question.correctAnswer) {
-        setUsedAnswers(prev => [...prev, quiz.answerCandidate]);
+      setPreloader(() => {
+        if (quiz.answerCandidate === quiz.question.correctAnswer) {
+          setUsedAnswers(prev => [...prev, quiz.answerCandidate]);
+          setQuiz(prev => ({
+            ...prev,
+            answersCorrect: prev.answersCorrect + 1,
+            answerState: true
+          }));
+        } else {
+          setQuiz(prev => ({
+            ...prev,
+            answersWrong: prev.answersWrong + 1,
+            answerState: false
+          }));
+        }
+      });
+    };
+
+    const setPreloader = (callback) => {
+      setQuiz(prev => ({
+        ...prev,
+        isLoading: true
+      }));
+
+      setTimeout(() => {
         setQuiz(prev => ({
           ...prev,
-          answersCorrect: prev.answersCorrect + 1,
-          answerState: true
+          isLoading: false
         }));
-      } else {
-        setQuiz(prev => ({
-          ...prev,
-          answersWrong: prev.answersWrong + 1,
-          answerState: false
-        }));
-      }
+        callback();
+      }, 1500);
     };
 
     const value = {quiz, usedAnswers};
@@ -138,7 +162,7 @@ export const QuizProvider = ({children}) => {
       setQuestionCount,
       setAnswerCandidate,
       checkAnswer,
-      buttonHandler
+      nextButtonHandler
     };
 
     return (
@@ -150,11 +174,3 @@ export const QuizProvider = ({children}) => {
     );
   }
 ;
-
-export const useQuiz = () => {
-  return useContext(QuestionContext);
-};
-
-export const useQuizActions = () => {
-  return useContext(QuestionActionsContext);
-};

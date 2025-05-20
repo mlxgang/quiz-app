@@ -1,6 +1,6 @@
-import data from '@/mock/quizz_questions.json';
-import { MAX_ANSWERS } from '@/constants';
-import { getRandomByNumber } from '@/utils';
+import data from '@mock/quizz_questions.json';
+import { MAX_ANSWERS } from '@constants';
+import { getRandomByNumber } from '@utils';
 
 export const createAnswersPool = (correctAnswer, excludeAnswers) => {
   const {countries} = JSON.parse(JSON.stringify(data));

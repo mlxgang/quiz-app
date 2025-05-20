@@ -1,6 +1,6 @@
-import logoImg from '@/assets/logo.svg';
-import { useCurrentPage } from '@/contexts/CurrentPageProvider.jsx';
-import { PAGES } from '@/constants';
+import logoImg from '@assets/logo.svg';
+import { useCurrentPage } from '@hooks';
+import { PAGES } from '@constants';
 import cl from './Logo.module.css';
 
 export const Logo = () => {

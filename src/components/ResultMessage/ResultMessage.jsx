@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { useQuiz } from '@/contexts/QuizProvider.jsx';
-import { getPluralAnswer } from '@/utils';
-import { RESULT_MODES } from '@/constants';
+import { useQuiz } from '@hooks';
+import { getPluralAnswer } from '@utils';
+import { RESULT_MODES } from '@constants';
 import cl from './ResultMessage.module.css';
 
 export const ResultMessage = () => {
